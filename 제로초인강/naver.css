@@ -301,30 +301,38 @@ main {
 }
 
 #main-ad {
-    display:inline-block;
+    float: left;
     width: 740px;
     height: 120px;
-    background-color:#555;
+    background: #555;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
+
 #main-login {
-    display:inline-block;
+    float: left;
     width: 332px;
     height: 120px;
     vertical-align: top;
-    background-color: wheat;
-   
+    background-color: white;
+    margin-bottom: 8px;
 }
 
 #main-ytn {
-    display:inline-block;
+    display: inline-block;
     width: 740px;
-    height: 120px;
+    height: 46px;
+    background-color: white;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
-
 #main-newsstand {
-    display:inline-block;
+    display: inline-block;
     width: 740px;
-    height: 120px;
+    height: 246px;
+    background-color: white;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
 #main-weather {
