@@ -533,3 +533,18 @@ main {
     height: 130px;
     background: #555;
 }
+
+subject-list {
+    float: left;
+}
+
+#subject-prev span:last-child {
+    position: absolute;
+    top: 15px;
+    left: 16px;
+    width: 8px;
+    height: 16px;
+    background-image: url(./sp_themecast.png);
+    background-repeat: no-repeat;
+    background-position: -320px 0;
+}
