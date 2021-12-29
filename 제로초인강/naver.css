@@ -121,6 +121,7 @@ nav li span:first-child {
 nav li:first-child span:first-child {
     width: 25px;
     background-position: 0 -285px;
+    margin-left: 0;
 }
 nav li:nth-child(2) span:first-child {
     width: 27px;
