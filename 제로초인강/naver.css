@@ -29,6 +29,8 @@
     /*background-repeat: no-repeat;*/
     background: url(./sp_search.png) -4px -4px no-repeat;
     vertical-align: middle;
+    position: relative;
+    top: -6px;
   
 }
 
