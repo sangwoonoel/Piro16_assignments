@@ -1,3 +1,7 @@
+* {
+    box-sizing: content-box border-box;
+}
+
 .blind {
     position: absolute;
     overflow: hidden;
@@ -12,6 +16,7 @@
 }
 
 #header-search > h1 {
+    vertical-align: middle;
 
     width: 198px;
     height: 48px;
@@ -26,16 +31,24 @@
 
 
 #header-search fieldset {
+    vertical-align: middle;
     margin-left: 20px;
     padding: 12px 0 12px 10px;
     width: 521px;
     height: 49px;
     display: inline-block;
     border: 2px solid #03cf5d;
+   
 }
+
+#header-search fieldset input {
+    border: none;
+    padding: 0;
+    outline: none;
+}
+    
 
 /*
 #header-center h1 {
     
-}
-*/
+}*/
