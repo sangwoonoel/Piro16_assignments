@@ -1,0 +1,12 @@
+nav {
+    display: flex;
+    background-color: black;
+}
+
+ a {
+    text-decoration-line: none;
+    color: white;
+}
+.menu {
+    margin-left:  20px;
+}
