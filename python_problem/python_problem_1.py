@@ -5,10 +5,24 @@ num = 0
 game = 0 #게임 숫자를 저장하는 변수
 turn = 0 #누구의 턴인지 저장하는 변수
 
-while True:
-      if game == 31:
-            break
+def brgame():
+      for i in range(num):
+            global game
+            game += 1            
                         
+            if turn % 2 != 0:             
+                  print('playerA : ', game)
+                  if game == 31:
+                        print('playerB win!')
+                        return 0 
+
+            else:
+                  print('playerB : ', game)
+                  if game == 31:
+                        print('playerA win!')
+                        return 0
+
+while True:                    
       turn += 1
       while True:
             try:
@@ -22,22 +36,10 @@ while True:
             else:
                   break
 
-      if turn % 2 != 0:
-            for i in range(num):
-                  game += 1
-                  if game == 31:
-                        print('playerB win!')
-                        break
-                        
-                  print('playerA : ', game)
-      else:
-            for i in range(num):
-                  game += 1
-                  if game == 31:
-                      print('playerA win!')
-                      break
-                        
-                  print('playerB : ', game)
+      end = brgame()
+      if end == 0:
+            break
+
     
           
                 
