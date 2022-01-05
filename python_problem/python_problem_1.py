@@ -26,6 +26,7 @@ while True:
             for i in range(num):
                   game += 1
                   if game == 31:
+                        print('playerB win!')
                         break
                         
                   print('playerA : ', game)
@@ -33,6 +34,7 @@ while True:
             for i in range(num):
                   game += 1
                   if game == 31:
+                      print('playerA win!')
                       break
                         
                   print('playerB : ', game)
