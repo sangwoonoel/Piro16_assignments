@@ -1,12 +1,13 @@
 class NotOneTwoThreeError(Exception):
      def __init__(self):
-         super().__init__('1,2,3 중 하나를 입력하세요')
+           super().__init__('1,2,3 중 하나를 입력하세요')
 
 num = 0
 game = 0 #게임 숫자를 세주는 변수
-
+turn = 0 #누구의 턴인지 알려주는 변수
 
 while True:
+ turn += 1
  while True:
   try:
    num = int(input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) :"))
@@ -18,7 +19,13 @@ while True:
    print(e)
   else:
    break
+ if turn % 2 != 0:
+  for i in range(num):
+   game += 1
+   print('PlayerA :', game)
+ else:
+  for i in range(num):
+   game += 1
+   print('PlayerB :', game)
 
- for i in range(num):
-  game += 1
-  print('PlayerA :', game)
+
