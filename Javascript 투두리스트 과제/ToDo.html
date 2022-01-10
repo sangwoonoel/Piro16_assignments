@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./ToDo.js" defer></script>
+    <link rel="stylesheet" href="./ToDo.css">
+    <title>상우의 오늘의 할 일</title>
+</head>
+<body>
+    <div class = 'mainBox'>
+        <div class = "inputBox">
+            <h3>오늘의 할 일</h3>
+            <input type="text" class="addBar">
+            <button class = "addBtn">추가</button>
+        </div>
+        <table class="list-table">
+            <colgroup>
+                <col width="10%">
+                <col width="90%">
+            </colgroup>
+            <thead>
+                <tr>    
+                    <th>check</th>
+                    <th>To do list</th>
+                </tr>
+            </thead>
+            <tbody id="listBody">
+            
+            </tbody>
+
+
+            
+        </table>
+        <div class="funcBox">
+            <button class="delCheck">선택 과제 삭제</button>
+            <button class="delLast">마지막 과제 삭제</button>
+            <button class="delAll">전체 삭제</button>
+        </div>
+    </div>
+</body>
+</html>
