@@ -22,15 +22,37 @@ def duration_format(value):
 
     return '%s %s , %s %s' % (hours, h, minutes, m)
 '''
+'''
 def review_list(request):
     reviews = Review.objects.all()
     ctx = {'reviews' : reviews}
 
     return render(request, template_name = 'list.html', context = ctx)
+'''
+def review_list(request):
+    sort = request.GET.get('sort', '') 
+    if sort == 'star':
+        reviews = Review.objects.all().order_by('-star')
+        ctx = {'reviews' : reviews}
+        return render(request, template_name = 'list.html', context = ctx)
+    
+    elif sort == 'time':
+        reviews = Review.objects.all().order_by('-time')
+        ctx = {'reviews' : reviews}
+        return render(request, template_name = 'list.html', context = ctx)
+    else:
+        reviews = Review.objects.all().order_by('-title')
+        ctx = {'reviews' : reviews}
+        return render(request, template_name = 'list.html', context = ctx)
+   
+
 
 def review_detail(request, pk):
     review = Review.objects.get(id=pk)
-    ctx = {'review' : review}
+    time = review.time
+    hour = int(time / 60)
+    minute = time % 60
+    ctx = {'review' : review, 'hour' : hour, 'minute' : minute}
 
     return render(request, template_name='detail.html', context= ctx)
 

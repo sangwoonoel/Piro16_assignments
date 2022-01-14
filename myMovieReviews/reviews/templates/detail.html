@@ -9,14 +9,14 @@
     <a href="{% url 'reviews:list' %}">my Movie reviews</a> <br />
     <a href="{% url 'reviews:update' review.id %}">수정하기</a> <br />
     <a href="{% url 'reviews:delete' review.id %}">삭제하기</a> <br />
-    <h1>{{ review.title }}</h1>
-    <p> {{ review.year }}</p>
-    <p> {{review.get_genre_display}}</p>
-    <p> {{ review.star }}</p>
-    <p>{{ review.time }}
-    <p>{{ review.content | linebreaksbr }}</p>
-    <p>{{ review.director }}</p>
-    <p>{{ review.actor }}</p>
+    <h1>제목 {{ review.title }}</h1>
+    <p>개봉년도 {{ review.year }}</p>
+    <p>장르 {{review.get_genre_display}}</p>
+    <p>별점 {{ review.star }}</p>
+    <p>러닝타임{{hour}}시간 {{minute}}분</p>
+    <p>리뷰 {{ review.content | linebreaksbr }}</p>
+    <p>감독 {{ review.director }}</p>
+    <p>배우 {{ review.actor }}</p>
 
   </body>
 </html>
