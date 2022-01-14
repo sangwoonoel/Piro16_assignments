@@ -2,8 +2,26 @@ from http.client import REQUEST_URI_TOO_LONG
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Review
 from .forms import ReviewForm
+'''
+from django import template
 
+register = template.Library()
 
+@register.filter('duration_format')
+def duration_format(value):
+    value = int(value)
+    h = 'hour'
+    m = 'minute'
+    hours = int(value/60)
+    minutes = value%60
+    if hours > 1:
+        h += 's'
+
+    if minutes > 1:
+        m += 's'
+
+    return '%s %s , %s %s' % (hours, h, minutes, m)
+'''
 def review_list(request):
     reviews = Review.objects.all()
     ctx = {'reviews' : reviews}

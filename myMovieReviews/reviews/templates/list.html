@@ -11,9 +11,11 @@
     <br />
     <h4>개봉 년도 : {{review.year}}</h4>
     <br />
-    <h4>장르 : {{review.genre}}</h4>
+    <h4>장르 : {{review.get_genre_display}}</h4>
     <br />
     <h4>별점 : {{review.star}}</h4>
+    <br />
+    <h4>상영 시간 : {{review.time}}</h4>
     {%endfor%}
     <a href="{% url 'reviews:create' %}">리뷰 작성</a> <br />
   </body>

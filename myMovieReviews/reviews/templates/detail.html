@@ -11,9 +11,9 @@
     <a href="{% url 'reviews:delete' review.id %}">삭제하기</a> <br />
     <h1>{{ review.title }}</h1>
     <p> {{ review.year }}</p>
-    <p> {{ review.genre }}</p>
+    <p> {{review.get_genre_display}}</p>
     <p> {{ review.star }}</p>
-    <p>{{ review.time }}</p>
+    <p>{{ review.time }}
     <p>{{ review.content | linebreaksbr }}</p>
     <p>{{ review.director }}</p>
     <p>{{ review.actor }}</p>
