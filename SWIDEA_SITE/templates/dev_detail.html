@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} DevTool {% endblock %}
+
+{% block content %}
+<a href="{% url 'idea:dev_edit' devs.id %}">수정</a>
+<a href="{% url 'idea:dev_list' %}">목록</a>
+<a href="{% url 'idea:dev_delete' devs.id %}">삭제</a>
+<h3>{{ devs.name }}</h3>
+<p>{{ devs.kind }}</p>
+<p>{{ devs.desc }}</p>
+{%for idea in ideas %}
+    <div class="list-review">
+        <p><span class="list-content">{{ idea.title }}</span></p>
+    </div>
+    {% endfor %}
+
+<!-- 이걸로 만들 수 있는 프로잭트 목록 -->
+
+{% endblock %}

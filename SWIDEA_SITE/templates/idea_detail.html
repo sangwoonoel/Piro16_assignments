@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} IDEA {% endblock %}
+
+{% block content %}
+<a href="{% url 'idea:idea_edit' ideas.id %}">수정</a>
+<a href="{% url 'idea:idea_list' %}">목록</a>
+<a href="{% url 'idea:idea_delete' ideas.id %}">삭제</a>
+<h3>{{ ideas.title }}</h3>
+<div class=list-poster>
+    {% if ideas.image %}
+        <img src="{{ideas.image.url}}" height="220" width="160">
+    {% else %}
+        <img class="movie-poster" src="https://picsum.photos/seed/{{idea.id}}/160/220">
+    {% endif %}
+</div>
+<p><strong> 아이디어 관심도 : {{ideas.interest}}</strong></p>
+<p>{{ ideas.content }}</p>
+
+
+<p><span class="list-item">개발툴</span>   <span class="list-content">{{ idea.devtool }}</span></p>
+
+
+
+{% endblock %}

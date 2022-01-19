@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="list-reviews"> 
+    {%for dev in devs %}
+    <div class="list-review">
+        <a href="{% url 'idea:dev_detail' dev.id %}"><h2>{{ dev.name }}</h2></a>
+        <p><span class="list-item"></span>   <span class="list-content">{{ dev.kind }}</span></p>
+        <a href="#">
+            <p><span class="list-item"></span>   <span class="list-content">{{ dev.desc }}</span></p>
+        </a>
+        
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

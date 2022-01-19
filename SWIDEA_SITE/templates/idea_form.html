@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form">
+        <h2 class="form-title">  <span class="highlight">Idea</span> review 🍿</h2>
+        <hr/>
+        <form method="POST" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>
+                <label>제목: </label> 
+                <input class="form-input" name="title" type="text" maxlength="30" value="{% if idea.title %}{{idea.title}}{% endif %}">
+            </p>
+            <p>
+                <label>내용: </label> 
+                <input class="form-input"  type="text" value="{% if idea.content %}{{idea.content}}{% endif %}">
+            </p>
+            
+            <p>
+                <label>별점: </label> 
+                <input id="rating" class="form-input"  type="text"  value="{% if idea.devtool %}{{idea.devtool}}{% endif %}" step="0.1" >
+            </p>
+            <p>
+                <label>사진: </label> 
+                <input class="form-input" name="poster" type="file" maxlength="255" value="{% if idea.image %}{{idea.image.url}}{% endif %}">
+            </p>
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="list-reviews"> 
+    {%for idea in ideas %}
+    <div class="list-review">
+        <a href="{% url 'idea:idea_detail' idea.id %}"><h2>{{ idea.title }}</h2></a>
+
+        <div class=list-poster>
+            {% if idea.image %}
+            <img src="{{idea.image.url}}" height="220" width="160">
+            {% else %}
+            <img class="movie-poster" src="https://picsum.photos/seed/{{idea.id}}/160/220">
+            {% endif %}
+        </div>
+        <p><span class="list-item">내용</span>   <span class="list-content">{{ idea.content }}</span></p>
+        
+        <p><span class="list-item">개발툴</span>   <span class="list-content">{{ idea.devtool }}</span></p>
+        
+        <div><span class="list-item">아이디어 관심도 : </span><span class="list-content" id="list-interest-{{idea.id}}">{{ idea.interest }}</span></div>
+        <div>
+            <a class="increaseQuantity" name="{{idea.id}}" type="button"><i class="fas fa-plus-square"></i></a>
+            <a class="decreaseQuantity" name="{{idea.id}}" type="button"><i class="fas fa-minus-square"></i></a>
+        </div>
+        <script type="text/javascript">
+            var isRun = false;
+            $(".increaseQuantity").click(function () { 
+                if(isRun == true) { return; } 
+                isRun = true;
+                var pk = $(this).attr('name')
+                $.ajax({ // ajax로 서버와 통신 비동기처리
+                    type: "POST", 
+                    url: "{% url 'idea:plus_interest' %}", 
+                    data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, 
+                    dataType: "json",
+                    success:function(response){
+                        $("#list-interest-"+pk).html(response.plus_interest)
+                        isRun  = false;
+                    },
+                    error : function(xhr,errmsg,err) {
+                    console.log('고장'); 
+                    }
+                });
+            })
+            $(".decreaseQuantity").click(function () { 
+                if(isRun == true) { return; } 
+                isRun = true;
+                var pk = $(this).attr('name')
+                $.ajax({ // ajax로 서버와 통신
+                    type: "POST", 
+                    url: "{% url 'idea:minus_interest' %}", 
+                    data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, 
+                    dataType: "json",
+                    success:function(response){
+                        $("#list-interest-"+pk).html(response.minus_interest)
+                        isRun  = false;
+                    },
+                    error : function(xhr,errmsg,err) {
+                    console.log('고장'); 
+                    }
+                });
+            })
+        </script>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
