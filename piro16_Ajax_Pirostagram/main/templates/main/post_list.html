@@ -1,0 +1,157 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main__container">
+        {% for post in posts %}
+            <div class="card post__container post-id-{{ post.id }}">
+                
+                    <div class="post__img">
+                        <img src="{% static 'img/img_lights.jpg' %}" alt="...">
+                    </div>
+                    <div class="card-title">{{ post.title }}</div>
+                    <div class="card-text">{{ post.content}}</div>
+                    <div class="like-btn" onclick="onClickLike({{ post.id }})">
+                        {% if post.like == 0 %}
+                            좋아요 X
+                        {% else %}
+                            좋아요 O
+                        {% endif %}
+                    </div>
+            </div>
+            <div class="post-comment">
+                <h3>댓글</h3>
+                <div>
+                    <table class="comment-table-{{post.id}}">
+                        {% for comment in post.comment_set.all %}
+                        <tr class = "comment-{{comment.id}}">
+                            <td>{{comment.message}}</td>
+                            <td>
+                                <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+    
+                </div>
+    
+                <section class="input">
+                    <input id="comment_input-{{post.id}}" placeholder="댓글 달기..." type="text"/>
+                    <button class="btn" onclick="onClickComment({{post.id}}, 'write')">게시</button>
+                </section>
+            </div>
+        </div>
+    
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+
+
+{% block extra %}
+    
+    <script>
+        const requestLike = new XMLHttpRequest();
+
+        const onClickLike = (id) => {
+            const url = "/like_ajax/";
+            requestLike.open("POST", url, true);
+            requestLike.setRequestHeader(
+                "Content-Type",
+                "application/x-www-form-urlencoded"
+            );
+            requestLike.send(JSON.stringify({id: id}));
+        };
+
+        const likeHandleResponse = () => {
+            if (requestLike.status < 400) {
+                const {id, like} = JSON.parse(requestLike.response);
+                const element = document.querySelector(`.post-id-${id} .like-btn`);
+                if(like === 0)
+                    element.innerHTML = "좋아요 X";
+                else
+                    element.innerHTML  = "좋아요 O";
+            }
+        }
+
+        requestLike.onreadystatechange = () => {
+            if (requestLike.readyState === XMLHttpRequest.DONE) {
+                likeHandleResponse();
+            }
+        }
+        
+        const requestComment = new XMLHttpRequest();
+        const requestDel = new XMLHttpRequest();
+
+        const onClickComment = (id, type) => {
+            const url = "write_comment/";
+            const message = document.getElementById(`comment_input-${id}`).value
+            requestComment.open("POST", url, true);
+            requestComment.setRequestHeader(
+                "Content-Type", "application/x-www-form-urlencoded"
+            );
+            requestComment.send(JSON.stringify({id: id, type: type, message: message}))
+        }
+
+        requestComment.onreadystatechange = () => {
+            if(requestComment.readyState === XMLHttpRequest.DONE){
+                WriteHandleResponse();
+            }
+        }
+
+
+        const WriteHandleResponse = () => {
+            if (requestComment.status < 400){
+                const {id, type, message, comment_id} = JSON.parse(requestComment.response);
+                const element = document.querySelector(`.comment-table-${id}`);
+                const new_comment = document.createElement("tr");
+                const comment_message = document.createElement("td");    
+                const del = document.createElement("td");
+                
+
+                new_comment.setAttribute("class", `comment-${comment_id}`);
+
+                comment_message.innerHTML = `${message}`;
+
+                del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`;
+            
+
+                document.getElementById(`comment_input-${id}`).value = '';
+                
+
+                element.append(new_comment);
+                new_comment.appendChild(comment_message);
+                new_comment.appendChild(del);
+            };
+        };
+
+
+
+        const onClickDel = (id) => {
+            const url = "del_comment/";
+            requestDel.open("POST", url, true);
+            requestDel.setRequestHeader(
+                "Content-Type", "application/x-www-form-urlencoded"
+            );
+            requestDel.send(JSON.stringify({id: id}))
+        }
+
+        const DelHandleResponse = () => {
+            if (requestComment.status < 400){
+                const {id} = JSON.parse(requestDel.response)
+
+                const element = document.querySelector(`.comment-${id}`)
+                element.remove();
+
+            }
+        }
+
+        requestDel.onreadystatechange = () => {
+            if(requestDel.readyState === XMLHttpRequest.DONE){
+                DelHandleResponse();
+            }
+        }
+    </script>
+  
+{% endblock %}
