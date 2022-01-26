@@ -24,12 +24,12 @@
                 <div>
                     <table class="comment-table-{{post.id}}">
                         {% for comment in post.comment_set.all %}
-                        <tr class = "comment-{{comment.id}}">
-                            <td>{{comment.message}}</td>
-                            <td>
-                                <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
-                            </td>
-                        </tr>
+                            <tr class = "comment-{{comment.id}}">
+                                <td>{{comment.message}}</td>
+                                <td>
+                                    <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                </td>
+                            </tr>
                         {% endfor %}
                     </table>
     
